@@ -5,5 +5,5 @@ public interface IStockCallback {
      * 获取库存
      * @return
      */
-    int getStock(String key);
+    int getStock();
 }

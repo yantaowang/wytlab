@@ -1,9 +1,30 @@
 package com.wyt.wytlab.redis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * 扣库存
+ *
+ * @author yuhao.wang
+ */
 @Service
-public class StockService implements IStockCallback {
+public class StockService {
+    Logger logger = LoggerFactory.getLogger(StockService.class);
+
     /**
      * 不限库存
      */
@@ -63,7 +84,7 @@ public class StockService implements IStockCallback {
         long stock = stock(key, num);
         // 初始化库存
         if (stock == UNINITIALIZED_STOCK) {
-            RedisLock redisLock = new RedisLock(redisTemplate, key);
+            RedisLock1 redisLock = new RedisLock1(redisTemplate, key);
             try {
                 // 获取锁
                 if (redisLock.tryLock()) {
@@ -116,7 +137,7 @@ public class StockService implements IStockCallback {
         }
 
         Assert.notNull(expire,"初始化库存失败，库存过期时间不能为null");
-        RedisLock redisLock = new RedisLock(redisTemplate, key);
+        RedisLock1 redisLock = new RedisLock1(redisTemplate, key);
         try {
             if (redisLock.tryLock()) {
                 // 获取到锁后再次判断一下是否有key
@@ -180,4 +201,5 @@ public class StockService implements IStockCallback {
         });
         return result;
     }
+
 }
