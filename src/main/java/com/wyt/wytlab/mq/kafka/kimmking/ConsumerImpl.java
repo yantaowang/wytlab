@@ -26,12 +26,23 @@ public class ConsumerImpl implements Consumer {
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         consumer = new KafkaConsumer(properties);
+
     }
 
     @Override
     public void consumeOrder() {
 
-        consumer.subscribe(Collections.singletonList(topic));
+//        consumer.subscribe(Collections.singletonList(topic));
+        consumer.subscribe(Arrays.asList(topic), new ConsumerRebalanceListener() {
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> collection) {
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> collection) {
+                collection.forEach(item -> consumer.seek(item, item.partition()));
+            }
+        });
 
         try {
             while (true) { //拉取数据
@@ -40,18 +51,19 @@ public class ConsumerImpl implements Consumer {
                 for (ConsumerRecord o : poll) {
                     ConsumerRecord<String, String> record = (ConsumerRecord) o;
                     Order order = JSON.parseObject(record.value(), Order.class);
-                    System.out.println(" order = " + order);
-//                    deduplicationOrder(order);
-//                    currentOffsets.put(new TopicPartition(record.topic(), record.partition()),
-//                            new OffsetAndMetadata(record.offset() + 1, "no matadata"));
-//                    consumer.commitAsync(currentOffsets, new OffsetCommitCallback() {
-//                        @Override
-//                        public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
-//                            if (exception != null) {
-//                                exception.printStackTrace();
-//                            }
-//                        }
-//                    });
+                    System.out.println("**************** order = " + order);
+                    deduplicationOrder(order);
+                    currentOffsets.put(new TopicPartition(record.topic(), record.partition()),
+                            new OffsetAndMetadata(record.offset() + 1, "no matadata"));
+                    consumer.commitAsync(currentOffsets, new OffsetCommitCallback() {
+                        @Override
+                        public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+                            if (exception != null) {
+                                exception.printStackTrace();
+                            }
+                        }
+                    });
+
                 }
             }
         } catch (CommitFailedException e) {
