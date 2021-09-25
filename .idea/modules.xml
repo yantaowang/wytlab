@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/wytlab.iml" filepath="$PROJECT_DIR$/wytlab.iml" />
       <module fileurl="file://$PROJECT_DIR$/wytlab-mq-starter/wytlab-mq-starter.iml" filepath="$PROJECT_DIR$/wytlab-mq-starter/wytlab-mq-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/wytlab-parent/wytlab-parent.iml" filepath="$PROJECT_DIR$/wytlab-parent/wytlab-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wytlab-spring-boot/wytlab-spring-boot.iml" filepath="$PROJECT_DIR$/wytlab-spring-boot/wytlab-spring-boot.iml" />
     </modules>
   </component>
 </project>
