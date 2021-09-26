@@ -2,20 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wytlab" />
+        <module name="wytlab-parent" />
+        <module name="wytlab-mq-starter" />
+        <module name="wytlab-spring-boot" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
+    <bytecodeTargetLevel>
       <module name="wytlab" target="1.8" />
+      <module name="wytlab-mq-starter" target="8" />
+      <module name="wytlab-parent" target="1.8" />
+      <module name="wytlab-spring-boot" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="wytlab" options="-parameters" />
+      <module name="wytlab" options="" />
+      <module name="wytlab-mq-starter" options="-parameters" />
+      <module name="wytlab-parent" options="-parameters" />
+      <module name="wytlab-spring-boot" options="-parameters" />
     </option>
   </component>
 </project>
