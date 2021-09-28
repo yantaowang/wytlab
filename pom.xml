@@ -8,6 +8,7 @@
         <module>wytlab-mq-starter</module>
         <module>wytlab-parent</module>
         <module>wytlab-spring-boot</module>
+        <module>wytlab-erwan</module>
     </modules>
 
     <parent>
