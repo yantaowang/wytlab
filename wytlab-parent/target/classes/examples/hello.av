@@ -1,0 +1,7 @@
+use com.wyt.wytlab.dubbo.Person;
+
+let list = seq.list();
+let person = new Person(1);
+setId(person, 13);
+seq.add(list,person);
+return list;
