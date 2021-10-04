@@ -1,7 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -217,5 +217,56 @@ public class Solution {
             }
         }
         return ret;
+    }
+
+    //柱状图中最大的矩形
+    public int largestRectangleArea(int[] heights) {
+        Stack<Rect> stack = new Stack<>();
+        int len = heights.length;
+        int[] newArr = Arrays.copyOf(heights, len + 1);
+        newArr[len] = 0;
+        int ans = 0;
+        for (int i = 0; i < newArr.length; i++) {
+           int realWith = 0;
+           while (!stack.empty() && stack.peek().height > newArr[i]) {
+               realWith += stack.peek().width;
+               ans = Math.max(ans, stack.peek().height * realWith);
+               stack.pop();
+           }
+           Rect rect = new Rect();
+           rect.height = newArr[i];
+           rect.width = realWith + 1;
+           stack.push(rect);
+        }
+        return ans;
+    }
+
+    private class Rect {
+        public int height;
+        public int width;
+    }
+
+    //接雨水
+    public int trap(int[] height) {
+        Stack<Rect> stack = new Stack<>();
+        int ans = 0;
+        //1
+        for (int i = 0; i < height.length; i++) {
+            int realWidth = 0;
+            while (!stack.empty() && stack.peek().height <= height[i]) {
+                realWidth += stack.peek().width;
+                int bottom = stack.peek().height;
+                stack.pop();
+                //验证空，水从左边溜走了
+                if(stack.empty()) continue;
+                int up = Math.min(stack.peek().height, height[i]);
+                ans += realWidth * (up - bottom);
+            }
+            Rect rect = new Rect();
+            rect.height = height[i];
+            rect.width = realWidth + 1;
+            stack.push(rect);
+        }
+        return ans;
     }
 }
