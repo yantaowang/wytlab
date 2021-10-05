@@ -9,6 +9,7 @@
         <module>wytlab-parent</module>
         <module>wytlab-spring-boot</module>
         <module>wytlab-erwan</module>
+        <module>wytlab-doc</module>
     </modules>
 
     <parent>

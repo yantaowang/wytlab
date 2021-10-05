@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/wytlab.iml" filepath="$PROJECT_DIR$/wytlab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wytlab-doc/wytlab-doc.iml" filepath="$PROJECT_DIR$/wytlab-doc/wytlab-doc.iml" />
       <module fileurl="file://$PROJECT_DIR$/wytlab-erwan/wytlab-erwan.iml" filepath="$PROJECT_DIR$/wytlab-erwan/wytlab-erwan.iml" />
       <module fileurl="file://$PROJECT_DIR$/wytlab-mq-starter/wytlab-mq-starter.iml" filepath="$PROJECT_DIR$/wytlab-mq-starter/wytlab-mq-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/wytlab-parent/wytlab-parent.iml" filepath="$PROJECT_DIR$/wytlab-parent/wytlab-parent.iml" />
