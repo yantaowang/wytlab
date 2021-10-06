@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class Solution {
     //第一周
@@ -227,16 +224,16 @@ public class Solution {
         newArr[len] = 0;
         int ans = 0;
         for (int i = 0; i < newArr.length; i++) {
-           int realWith = 0;
-           while (!stack.empty() && stack.peek().height > newArr[i]) {
-               realWith += stack.peek().width;
-               ans = Math.max(ans, stack.peek().height * realWith);
-               stack.pop();
-           }
-           Rect rect = new Rect();
-           rect.height = newArr[i];
-           rect.width = realWith + 1;
-           stack.push(rect);
+            int realWith = 0;
+            while (!stack.empty() && stack.peek().height > newArr[i]) {
+                realWith += stack.peek().width;
+                ans = Math.max(ans, stack.peek().height * realWith);
+                stack.pop();
+            }
+            Rect rect = new Rect();
+            rect.height = newArr[i];
+            rect.width = realWith + 1;
+            stack.push(rect);
         }
         return ans;
     }
@@ -258,7 +255,7 @@ public class Solution {
                 int bottom = stack.peek().height;
                 stack.pop();
                 //验证空，水从左边溜走了
-                if(stack.empty()) continue;
+                if (stack.empty()) continue;
                 int up = Math.min(stack.peek().height, height[i]);
                 ans += realWidth * (up - bottom);
             }
@@ -266,6 +263,26 @@ public class Solution {
             rect.height = height[i];
             rect.width = realWidth + 1;
             stack.push(rect);
+        }
+        return ans;
+    }
+
+    //滑动窗口最大值
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int[] ans = new int[nums.length - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            while (!deque.isEmpty() && deque.getFirst() <= i - k) {
+                deque.removeFirst();
+            }
+            while (!deque.isEmpty() && nums[deque.getLast()] <= nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(i);
+            //取答案
+            if (i >= k - 1) {
+                ans[i - k + 1] = nums[deque.getFirst()];
+            }
         }
         return ans;
     }
