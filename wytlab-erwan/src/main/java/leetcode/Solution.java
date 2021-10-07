@@ -3,6 +3,37 @@ package leetcode;
 import java.util.*;
 
 public class Solution {
+    //作业1
+    //合并两个有序链表
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode node = new ListNode(-1);
+        ListNode cur = node;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = l1 != null ? l1 : l2;
+        return node.next;
+    }
+    //作业2
+    //加1
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+
     //第一周
     public int removeDuplicates(int[] nums) {
         int n = 0;
@@ -91,36 +122,6 @@ public class Solution {
             head = head.next;
         }
         return null;
-    }
-
-    //合并两个有序链表
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode node = new ListNode(-1);
-        ListNode cur = node;
-        while (l1 != null && l2 != null) {
-            if (l1.val <= l2.val) {
-                cur.next = l1;
-                l1 = l1.next;
-            } else {
-                cur.next = l2;
-                l2 = l2.next;
-            }
-            cur = cur.next;
-        }
-        cur.next = l1 != null ? l1 : l2;
-        return node.next;
-    }
-
-    //加1
-    public int[] plusOne(int[] digits) {
-        for (int i = digits.length - 1; i >= 0; i--) {
-            digits[i]++;
-            digits[i] = digits[i] % 10;
-            if (digits[i] != 0) return digits;
-        }
-        digits = new int[digits.length + 1];
-        digits[0] = 1;
-        return digits;
     }
 
     //有效的括号
