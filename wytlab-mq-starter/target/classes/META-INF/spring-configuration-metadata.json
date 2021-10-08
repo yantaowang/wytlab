@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "com.mq",
+      "type": "com.wytlab.starter.properties.MrMqProperties",
+      "sourceType": "com.wytlab.starter.properties.MrMqProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "com.mq.address",
+      "type": "java.lang.String",
+      "sourceType": "com.wytlab.starter.properties.MrMqProperties"
+    },
+    {
+      "name": "com.mq.channel",
+      "type": "java.lang.String",
+      "sourceType": "com.wytlab.starter.properties.MrMqProperties"
+    }
+  ],
+  "hints": []
+}
