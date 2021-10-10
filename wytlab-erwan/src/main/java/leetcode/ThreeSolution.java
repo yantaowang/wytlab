@@ -114,10 +114,22 @@ public class ThreeSolution {
 
     private  Map<String, Integer> wordsMap;
 
-
-    public static void main(String[] args) {
-        System.out.println("aaaa".substring(0,4));
+    //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组
+    public int numberOfSubarrays(int[] nums, int k) {
+        int[] s = new int[nums.length + 1];
+        for (int i = 1; i <= nums.length ; i++) {
+            s[i] = s[i - 1] + nums[i -1] % 2;
+        }
+        int[] count = new int[nums.length + 1];
+        int ans = 0;
+        count[s[0]]++;
+        for (int i = 1; i <= nums.length; i++) {
+            if(s[i] - k >= 0) {
+                ans += count[s[i] - k];
+            }
+            count[s[i]]++;
+        }
+        return ans;
     }
-
 
 }
