@@ -8,5 +8,8 @@ public class Ltest {
         System.out.println(solution.evalRPN(new String[]{"10","6","9","3","+","-11","*","/","*","17","+","5","+"}));
 
         solution.maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3);
+
+        ThreeSolution threeSolution = new ThreeSolution();
+        threeSolution.findSubstring("barfoothefoobarman",new String[]{"foo","bar"});
     }
 }
