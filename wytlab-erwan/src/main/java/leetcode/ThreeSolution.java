@@ -114,7 +114,7 @@ public class ThreeSolution {
 
     private  Map<String, Integer> wordsMap;
 
-    //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组
+    //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组  ******
     public int numberOfSubarrays(int[] nums, int k) {
         int[] s = new int[nums.length + 1];
         for (int i = 1; i <= nums.length ; i++) {
@@ -132,4 +132,8 @@ public class ThreeSolution {
         return ans;
     }
 
+    //https://leetcode-cn.com/problems/maximum-subarray/ 最大子序和
+    public int maxSubArray(int[] nums) {
+
+    }
 }

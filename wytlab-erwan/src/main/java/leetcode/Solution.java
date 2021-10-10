@@ -217,7 +217,7 @@ public class Solution {
         return ret;
     }
 
-    //柱状图中最大的矩形
+    //柱状图中最大的矩形 ******
     public int largestRectangleArea(int[] heights) {
         Stack<Rect> stack = new Stack<>();
         int len = heights.length;
@@ -268,7 +268,7 @@ public class Solution {
         return ans;
     }
 
-    //滑动窗口最大值
+    //滑动窗口最大值  ******
     public int[] maxSlidingWindow(int[] nums, int k) {
         int[] ans = new int[nums.length - k + 1];
         Deque<Integer> deque = new LinkedList<>();
