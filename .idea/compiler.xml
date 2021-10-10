@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="wytlab-doc" />
         <module name="wytlab-mq-starter" />
         <module name="wytlab-spring-boot" />
         <module name="wytlab-erwan" />
@@ -15,6 +16,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="wytlab" target="1.8" />
+      <module name="wytlab-doc" target="1.8" />
       <module name="wytlab-erwan" target="1.8" />
       <module name="wytlab-mq-starter" target="8" />
       <module name="wytlab-parent" target="1.8" />
@@ -24,6 +26,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="wytlab" options="" />
+      <module name="wytlab-doc" options="-parameters" />
       <module name="wytlab-erwan" options="-parameters" />
       <module name="wytlab-mq-starter" options="-parameters" />
       <module name="wytlab-parent" options="-parameters" />
