@@ -69,10 +69,36 @@ public class ThreeSolution {
 
     private  Map<String, Integer> wordsMap;
 
-
-    public static void main(String[] args) {
-        System.out.println("aaaa".substring(0,4));
+    //https://leetcode-cn.com/problems/corporate-flight-bookings/ 航班预订统计 ************
+    public int[] corpFlightBookings(int[][] bookings, int n) {
+        int[] delta = new int[n+2];
+        for (int[] booking:bookings) {
+            int first = booking[0];
+            int last = booking[1];
+            int seats = booking[2];
+            delta[first] += seats;
+            delta[last+1] -= seats;
+        }
+        int[] sum = new int[n+1];
+        for (int i = 1; i <= n ; i++) {
+            sum[i] = sum[i-1] + delta[i];
+        }
+        int[] answer = new int[n];
+        for (int i = 1; i <= n ; i++) {
+            answer[i-1] = sum[i];
+        }
+        return answer;
     }
 
-
+    //https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+    public int[] twoSum1(int[] numbers, int target) {
+        int j = numbers.length-1;
+        for (int i = 0; i < numbers.length; i++) {
+            while (i < j && numbers[i] + numbers[j] > target) j--;
+            if(i< j && numbers[i] + numbers[j] == target) {
+                return new int[]{i+1, j+1};
+            }
+        }
+        return null;
+    }
 }
