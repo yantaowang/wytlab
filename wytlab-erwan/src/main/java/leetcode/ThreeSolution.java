@@ -156,7 +156,7 @@ public class ThreeSolution {
 
     private  Map<String, Integer> wordsMap;
 
-    //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组  ******
+    //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组 前缀和、数组计数代码模板
     public int numberOfSubarrays(int[] nums, int k) {
         int[] s = new int[nums.length + 1];
         for (int i = 1; i <= nums.length ; i++) {
@@ -195,5 +195,19 @@ public class ThreeSolution {
         return ans;
     }
 
+    //https://leetcode-cn.com/problems/container-with-most-water/
+    public int maxArea(int[] height) {
+        int i = 0, j = height.length - 1;
+        int ans = 0;
+        while (i < j) {
+            ans = Math.max(ans, Math.min(height[i], height[j]) * (j-i));
+            if(height[i] < height[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return ans;
+    }
 
 }
