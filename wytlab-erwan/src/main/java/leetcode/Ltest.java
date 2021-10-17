@@ -11,5 +11,6 @@ public class Ltest {
 
         ThreeSolution threeSolution = new ThreeSolution();
         threeSolution.findSubstring("barfoothefoobarman",new String[]{"foo","bar"});
+        threeSolution.findShortestSubArray(new int[]{2,1,1,2,1,3,3,3,1,3,1,3,2});
     }
 }

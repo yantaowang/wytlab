@@ -3,6 +3,48 @@ package leetcode;
 import java.util.*;
 
 public class ThreeSolution {
+    //数组的度（作业）
+    //https://leetcode-cn.com/problems/degree-of-an-array/
+    public int findShortestSubArray(int[] nums) {
+        Map<Integer,Integer> numMap = new HashMap<>();
+        Map<Integer,Integer> indexMap = new HashMap<>();
+        int count = 0;
+        int ans = 1;
+        for (int i = 0; i < nums.length; i++) {
+            if(numMap.containsKey(nums[i])) {
+                if(numMap.get(nums[i]) + 1 > count || (numMap.get(nums[i]) + 1 == count && i - indexMap.get(nums[i]) + 1 < ans)) {
+                    count = numMap.get(nums[i]) + 1;
+                    ans = i - indexMap.get(nums[i]) + 1;
+                    numMap.put(nums[i], count);
+                } else {
+                    numMap.put(nums[i], numMap.get(nums[i]) + 1);
+                }
+            } else {
+                numMap.put(nums[i], 1);
+                indexMap.put(nums[i], i);
+            }
+        }
+        return ans;
+    }
+    //和为 K 的子数组(作业)
+    //https://leetcode-cn.com/problems/subarray-sum-equals-k/
+    public int subarraySum(int[] nums, int k) {
+        int n = nums.length;
+        int[] s = new int[n + 1];
+        s[0] = 0;
+        int ans = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        for (int i = 1; i <= n ; i++) {
+            s[i] = s[i-1] + nums[i - 1];
+            if(map.containsKey(s[i] - k)) {
+                ans += map.get(s[i] - k);
+            }
+            map.put(s[i], map.getOrDefault(s[i], 0) + 1);
+        }
+        return ans;
+    }
     //两数之和
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -134,6 +176,24 @@ public class ThreeSolution {
 
     //https://leetcode-cn.com/problems/maximum-subarray/ 最大子序和
     public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int[] s = new int[n + 1];
+        int[] premin = new int[n + 1];
+        s[0] = 0;
+        for (int i = 1; i <= n ; i++) {
+            s[i] = s[i-1] + nums[i -1];
+        }
 
+        premin[0] = s[0];
+        for (int i = 1; i <= n ; i++) {
+            premin[i] = Math.min(premin[i-1], s[i]);
+        }
+        int ans = -1000000;
+        for (int i = 1; i <= n ; i++) {
+            ans = Math.max(ans, s[i] - premin[i-1]);
+        }
+        return ans;
     }
+
+
 }
