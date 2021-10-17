@@ -3,7 +3,7 @@ package leetcode;
 import java.util.*;
 
 public class ThreeSolution {
-    //数组的度（作业）
+    //数组的度（作业）  时间复杂度O(n), 空间复杂度O(n)
     //https://leetcode-cn.com/problems/degree-of-an-array/
     public int findShortestSubArray(int[] nums) {
         Map<Integer,Integer> numMap = new HashMap<>();
@@ -26,7 +26,7 @@ public class ThreeSolution {
         }
         return ans;
     }
-    //和为 K 的子数组(作业)
+    //和为 K 的子数组(作业)   时间复杂度O(n), 空间复杂度O(n)
     //https://leetcode-cn.com/problems/subarray-sum-equals-k/
     public int subarraySum(int[] nums, int k) {
         int n = nums.length;
