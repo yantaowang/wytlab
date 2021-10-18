@@ -228,4 +228,29 @@ public class ThreeSolution {
         }
         return null;
     }
+
+    //https://leetcode-cn.com/problems/3sum/
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            List<List<Integer>> jks = twoSumNew(nums, i + 1, -nums[i]);
+            for (List<Integer> list: jks) {
+                ans.add(Arrays.asList(nums[i], list.get(0),list.get(1)));
+            }
+        }
+        return ans;
+    }
+
+    public List<List<Integer>> twoSumNew(int[] numbers, int start, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int j = numbers.length-1;
+        for (int i = start; i < numbers.length; i++) {
+            while (i < j && numbers[i] + numbers[j] > target) j--;
+            if(i< j && numbers[i] + numbers[j] == target) {
+                ans.add(Arrays.asList(numbers[i], numbers[j]));
+            }
+        }
+        return ans;
+    }
 }
