@@ -253,4 +253,79 @@ public class ThreeSolution {
         }
         return ans;
     }
+
+    List<Integer> t = new ArrayList<Integer>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        dfs(0, nums);
+        return ans;
+    }
+
+    public void dfs(int cur, int[] nums) {
+        if (cur == nums.length) {
+            ans.add(new ArrayList<Integer>(t));
+            return;
+        }
+        t.add(nums[cur]);
+        dfs(cur + 1, nums);
+        t.remove(t.size() - 1);
+        dfs(cur + 1, nums);
+    }
+
+
+    public List<List<Integer>> combine(int n, int k) {
+        ans1 = new ArrayList<>();
+        as = new ArrayList<>();
+        dfs(1, n, k);
+        return ans1;
+    }
+    private List<List<Integer>> ans1;
+    List<Integer> as;
+    private void dfs(int cur, int n, int k) {
+        if(as.size() + n-cur+1 < k) {
+            return;
+        }
+        if(as.size() == k) {
+            ans1.add(new ArrayList<>(as));
+            return;
+        }
+        as.add(cur);
+        dfs(cur+1, n, k);
+        as.remove(as.size()-1);
+        dfs(cur+1,n,k);
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+       ans2 = new ArrayList<>();
+       a = new ArrayList<>();
+       used = new ArrayList<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            used.add(false);
+        }
+       recur(nums, 0);
+       return ans2;
+    }
+    public void recur(int[] nums, int pos) {
+        if(pos == nums.length) {
+            ans2.add(new ArrayList<>(a));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if(used.size() > 0 && !used.get(i)) {
+                a.add(nums[i]);
+                used.set(i, true);
+                recur(nums, pos+1);
+                used.set(i, false);
+                a.remove(a.size()-1);
+            }
+        }
+    }
+    private List<List<Integer>> ans2;
+    List<Integer> a;
+    private List<Boolean> used;
+
+    public TreeNode invertTree(TreeNode root) {
+
+    }
 }
