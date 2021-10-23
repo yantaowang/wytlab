@@ -154,6 +154,28 @@ public class ThreeSolution {
         return true;
     }
 
+
+    //https://leetcode-cn.com/problems/corporate-flight-bookings/ 航班预订统计 ************
+    public int[] corpFlightBookings(int[][] bookings, int n) {
+        int[] delta = new int[n+2];
+        for (int[] booking:bookings) {
+            int first = booking[0];
+            int last = booking[1];
+            int seats = booking[2];
+            delta[first] += seats;
+            delta[last+1] -= seats;
+        }
+        int[] sum = new int[n+1];
+        for (int i = 1; i <= n ; i++) {
+            sum[i] = sum[i-1] + delta[i];
+        }
+        int[] answer = new int[n];
+        for (int i = 1; i <= n ; i++) {
+            answer[i-1] = sum[i];
+        }
+        return answer;
+    }
+
     private  Map<String, Integer> wordsMap;
 
     //https://leetcode-cn.com/problems/count-number-of-nice-subarrays/submissions/ 优美子数组 前缀和、数组计数代码模板
@@ -195,6 +217,30 @@ public class ThreeSolution {
         return ans;
     }
 
+    //https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+    public int[] twoSum1(int[] numbers, int target) {
+        int j = numbers.length-1;
+        for (int i = 0; i < numbers.length; i++) {
+            while (i < j && numbers[i] + numbers[j] > target) j--;
+            if(i< j && numbers[i] + numbers[j] == target) {
+                return new int[]{i+1, j+1};
+            }
+        }
+        return null;
+    }
+
+    //https://leetcode-cn.com/problems/3sum/
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            List<List<Integer>> jks = twoSumNew(nums, i + 1, -nums[i]);
+            for (List<Integer> list: jks) {
+                ans.add(Arrays.asList(nums[i], list.get(0),list.get(1)));
+            }
+        }
+        return ans;
+    }
     //https://leetcode-cn.com/problems/container-with-most-water/
     public int maxArea(int[] height) {
         int i = 0, j = height.length - 1;
@@ -210,4 +256,90 @@ public class ThreeSolution {
         return ans;
     }
 
+    public List<List<Integer>> twoSumNew(int[] numbers, int start, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int j = numbers.length-1;
+        for (int i = start; i < numbers.length; i++) {
+            while (i < j && numbers[i] + numbers[j] > target) j--;
+            if(i< j && numbers[i] + numbers[j] == target) {
+                ans.add(Arrays.asList(numbers[i], numbers[j]));
+            }
+        }
+        return ans;
+    }
+
+    List<Integer> t = new ArrayList<Integer>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        dfs(0, nums);
+        return ans;
+    }
+
+    public void dfs(int cur, int[] nums) {
+        if (cur == nums.length) {
+            ans.add(new ArrayList<Integer>(t));
+            return;
+        }
+        t.add(nums[cur]);
+        dfs(cur + 1, nums);
+        t.remove(t.size() - 1);
+        dfs(cur + 1, nums);
+    }
+
+
+    public List<List<Integer>> combine(int n, int k) {
+        ans1 = new ArrayList<>();
+        as = new ArrayList<>();
+        dfs(1, n, k);
+        return ans1;
+    }
+    private List<List<Integer>> ans1;
+    List<Integer> as;
+    private void dfs(int cur, int n, int k) {
+        if(as.size() + n-cur+1 < k) {
+            return;
+        }
+        if(as.size() == k) {
+            ans1.add(new ArrayList<>(as));
+            return;
+        }
+        as.add(cur);
+        dfs(cur+1, n, k);
+        as.remove(as.size()-1);
+        dfs(cur+1,n,k);
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+       ans2 = new ArrayList<>();
+       a = new ArrayList<>();
+       used = new ArrayList<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            used.add(false);
+        }
+       recur(nums, 0);
+       return ans2;
+    }
+    public void recur(int[] nums, int pos) {
+        if(pos == nums.length) {
+            ans2.add(new ArrayList<>(a));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if(used.size() > 0 && !used.get(i)) {
+                a.add(nums[i]);
+                used.set(i, true);
+                recur(nums, pos+1);
+                used.set(i, false);
+                a.remove(a.size()-1);
+            }
+        }
+    }
+    private List<List<Integer>> ans2;
+    List<Integer> a;
+    private List<Boolean> used;
+
+    public TreeNode invertTree(TreeNode root) {
+
+    }
 }
