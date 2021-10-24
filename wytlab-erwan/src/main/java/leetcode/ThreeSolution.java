@@ -339,7 +339,4 @@ public class ThreeSolution {
     List<Integer> a;
     private List<Boolean> used;
 
-    public TreeNode invertTree(TreeNode root) {
-
-    }
 }
