@@ -339,4 +339,39 @@ public class ThreeSolution {
     List<Integer> a;
     private List<Boolean> used;
 
+    public TreeNode invertTree(TreeNode root) {
+       if(root == null) {
+           return null;
+       }
+       TreeNode temp = root.left;
+       root.left = root.right;
+       root.right = temp;
+       invertTree(root.left);
+       invertTree(root.right);
+       return root;
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+    }
+
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        } else {
+            int maxLeft = maxDepth(root.left);
+            int maxRight = maxDepth(root.right);
+            return Math.max(maxLeft, maxRight) + 1;
+        }
+    }
 }
