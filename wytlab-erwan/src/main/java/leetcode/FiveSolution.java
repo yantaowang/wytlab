@@ -1,5 +1,7 @@
 package leetcode;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class FiveSolution {
@@ -32,6 +34,39 @@ public class FiveSolution {
     }
 
     private Map<Integer, List<String>> map = new HashMap<>();
+
+    //https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/
+    public List<Integer> preorder(Node root) {
+       List<Integer> list = new ArrayList<>();
+       if(root == null) return list;
+       Stack<Node> stack = new Stack<>();
+       stack.push(root);
+       while (!stack.isEmpty()) {
+           Node cur = stack.pop();
+           list.add(cur.val);
+           for (int i = cur.children.size() - 1; i >= 0 ; i--) {
+              stack.push(cur.children.get(i));
+           }
+       }
+       return list;
+    }
+
+    public List<List<Integer>> levelOrder(Node root) {
+        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        if(root == null) return list;
+        queue.add(new Pair<>(root, 0));
+        while (!queue.isEmpty()) {
+            Node cur = queue.peek().getKey();
+            Integer depth = queue.poll().getValue();
+            if(depth >= queue.size()) list.add(new ArrayList<>());
+            list.get(depth).add(cur.val);
+            for (int i = 0; i < cur.children.size(); i++) {
+                queue.add(new Pair<>(cur.children.get(i), depth + 1));
+            }
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         FiveSolution fiveSolution = new FiveSolution();
