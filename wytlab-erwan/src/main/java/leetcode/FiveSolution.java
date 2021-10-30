@@ -35,37 +35,86 @@ public class FiveSolution {
 
     private Map<Integer, List<String>> map = new HashMap<>();
 
-    //https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/
-    public List<Integer> preorder(Node root) {
-       List<Integer> list = new ArrayList<>();
-       if(root == null) return list;
-       Stack<Node> stack = new Stack<>();
-       stack.push(root);
-       while (!stack.isEmpty()) {
-           Node cur = stack.pop();
-           list.add(cur.val);
-           for (int i = cur.children.size() - 1; i >= 0 ; i--) {
-              stack.push(cur.children.get(i));
-           }
-       }
-       return list;
+//    //https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/
+//    public List<Integer> preorder(Node root) {
+//       List<Integer> list = new ArrayList<>();
+//       if(root == null) return list;
+//       Stack<Node> stack = new Stack<>();
+//       stack.push(root);
+//       while (!stack.isEmpty()) {
+//           Node cur = stack.pop();
+//           list.add(cur.val);
+//           for (int i = cur.children.size() - 1; i >= 0 ; i--) {
+//              stack.push(cur.children.get(i));
+//           }
+//       }
+//       return list;
+//    }
+
+//    public List<List<Integer>> levelOrder(Node root) {
+//        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
+//        List<List<Integer>> list = new ArrayList<>();
+//        if(root == null) return list;
+//        queue.add(new Pair<>(root, 0));
+//        while (!queue.isEmpty()) {
+//            Node cur = queue.peek().getKey();
+//            Integer depth = queue.poll().getValue();
+//            if(depth >= queue.size()) list.add(new ArrayList<>());
+//            list.get(depth).add(cur.val);
+//            for (int i = 0; i < cur.children.size(); i++) {
+//                queue.add(new Pair<>(cur.children.get(i), depth + 1));
+//            }
+//        }
+//        return list;
+//    }
+
+    //https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        dfs(ans, root);
+        return ans;
+    }
+    private void dfs(List<Integer> ans, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(ans, root.left);
+        ans.add(root.val);
+        dfs(ans, root.right);
     }
 
-    public List<List<Integer>> levelOrder(Node root) {
-        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
-        List<List<Integer>> list = new ArrayList<>();
-        if(root == null) return list;
-        queue.add(new Pair<>(root, 0));
-        while (!queue.isEmpty()) {
-            Node cur = queue.peek().getKey();
-            Integer depth = queue.poll().getValue();
-            if(depth >= queue.size()) list.add(new ArrayList<>());
-            list.get(depth).add(cur.val);
-            for (int i = 0; i < cur.children.size(); i++) {
-                queue.add(new Pair<>(cur.children.get(i), depth + 1));
+    //https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/submissions/
+    public List<Integer> preorder(Node root) {
+        if (root == null) return new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.empty()) {
+            Node node = stack.pop();
+            ans.add(node.val);
+            for (int i = node.children.size() - 1; i >= 0; i--) {
+                stack.add(node.children.get(i));
             }
         }
-        return list;
+        return ans;
+    }
+
+    //https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if(root == null) return ans;
+        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
+        queue.add(new Pair<>(root, 0)); 
+        while (!queue.isEmpty()) {
+            Node node = queue.peek().getKey();
+            Integer depth = queue.poll().getValue();
+            if(depth >= ans.size()) ans.add(new ArrayList<>());
+            ans.get(depth).add(node.val);
+            for (int i = 0; i < node.children.size(); i++) {
+                queue.add(new Pair<Node, Integer>(node.children.get(i), depth + 1));
+            }
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
