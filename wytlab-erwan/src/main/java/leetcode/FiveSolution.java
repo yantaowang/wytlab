@@ -117,6 +117,43 @@ public class FiveSolution {
         return ans;
     }
 
+    //https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.preorder = preorder;
+        this.inorder = inorder;
+        return build(0, preorder.length - 1, 0, inorder.length - 1);
+    }
+
+    private TreeNode build(int l1, int r1, int l2, int r2) {
+        if(l1 > r1) return null;
+        int mid = l2;
+        while (inorder[mid] != preorder[l1]) mid++;
+        TreeNode root = new TreeNode(preorder[l1]);
+        root.left = build(l1 + 1, l1 + mid - l2, l2, mid - 1);
+        root.right = build(l1 + mid - l2 + 1, r1, mid + 1, r2);
+        return root;
+    }
+
+    private int[] preorder;
+    private int[] inorder;
+
+    private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return false;
+        boolean lson = dfs(root.left, p, q);
+        boolean rson = dfs(root.right, p, q);
+        if ((lson && rson) || ((root.val == p.val || root.val == q.val) && (lson || rson))) {
+            ans = root;
+        }
+        return lson || rson || (root.val == p.val || root.val == q.val);
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        this.dfs(root, p, q);
+        return this.ans;
+    }
+
+    private TreeNode ans;
+
     public static void main(String[] args) {
         FiveSolution fiveSolution = new FiveSolution();
         System.out.println(fiveSolution.myPow(2,10));
