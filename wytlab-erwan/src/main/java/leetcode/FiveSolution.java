@@ -5,6 +5,34 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class FiveSolution {
+    //https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+    public TreeNode buildTree1(int[] inorder, int[] postorder) {
+        return build1(inorder, 0, inorder.length - 1,
+                postorder, 0, postorder.length - 1);
+    }
+    public TreeNode build1(int[] inorder, int inStart, int inEnd,
+                          int[] postorder, int postStart, int postEnd) {
+        // base case
+        if (inStart > inEnd) {
+            return null;
+        }
+
+        // root 节点对应的值是后序遍历数组的最后一个元素
+        int rootVal = postorder[postEnd];
+        // 找到 root 在中序遍历中的位置
+        int index = 0;
+        while (inorder[index] != postorder[postEnd]) index++;
+        // 先构造出根节点
+        TreeNode root = new TreeNode(rootVal);
+        // 递归构造左右子树
+        root.left = build1(inorder, inStart, index - 1,
+                postorder, postStart, postStart + index - inStart - 1);
+        root.right = build1(inorder, index + 1, inEnd,
+                postorder, postStart + index - inStart, postEnd - 1);
+
+        // 返回根节点
+        return root;
+    }
     //https://leetcode-cn.com/problems/powx-n/
     public double myPow(double x, int n) {
         if(n == 0) return 1;
@@ -153,6 +181,130 @@ public class FiveSolution {
     }
 
     private TreeNode ans;
+
+    //https://leetcode-cn.com/problems/course-schedule/
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> to = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            to.add(new ArrayList<>());
+        }
+        int[] indeg = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            int ai = prerequisites[i][0];
+            int bi = prerequisites[i][1];
+            to.get(bi).add(ai);
+            indeg[ai]++;
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < indeg.length; i++) {
+            if(indeg[i] == 0) {
+                queue.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Integer course = queue.poll();
+            ans.add(course);
+            for (int i = 0; i < to.get(course).size(); i++) {
+                indeg[to.get(course).get(i)]--;
+                if(indeg[to.get(course).get(i)] == 0) {
+                    queue.add(to.get(course).get(i));
+                }
+            }
+        }
+        return ans.size() == numCourses;
+    }
+
+    //https://leetcode-cn.com/problems/course-schedule-ii/
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> to = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            to.add(new ArrayList<>());
+        }
+        int[] indeg = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            int ai = prerequisites[i][0];
+            int bi = prerequisites[i][1];
+            to.get(bi).add(ai);
+            indeg[ai]++;
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < indeg.length; i++) {
+            if(indeg[i] == 0) {
+                queue.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Integer course = queue.poll();
+            ans.add(course);
+            for (int i = 0; i < to.get(course).size(); i++) {
+                indeg[to.get(course).get(i)]--;
+                if(indeg[to.get(course).get(i)] == 0) {
+                    queue.add(to.get(course).get(i));
+                }
+            }
+        }
+
+        if(ans.size() != numCourses) {
+            return new int[0];
+        } else {
+            int[] aa = new int[ans.size()];
+            for (int i = 0; i < ans.size(); i++) {
+                aa[i] = ans.get(i);
+            }
+            return aa;
+        }
+    }
+
+    // TODO: 2021/11/7 有问题
+    //https://leetcode-cn.com/problems/redundant-connection/
+    List<List<Integer>> to = new ArrayList<>();
+    boolean hasCycle = false;
+    public int[] findRedundantConnection(int[][] edges) {
+        int n = 0;
+        for (int i = 0; i < edges.length; i++) {
+            n = Math.max(n, Math.max(edges[i][0],edges[i][1]));
+        }
+
+        to = new ArrayList<>(n+1);
+        for (int i = 0; i < n+1; i++) {
+            to.add(new ArrayList<>());
+        }
+
+        boolean[] visited = new boolean[n+1];
+        for (int i = 0; i < visited.length; i++) {
+            visited[i] = false;
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            int x = edges[i][0];
+            int y = edges[i][1];
+            to.get(x).add(y);
+            to.get(y).add(x);
+
+            hasCycle = false;
+            for (int i1 = 1; i1 < visited.length; i1++) {
+                visited[i] = false;
+            }
+
+            dfs(visited, x, 0);
+            if(hasCycle) return edges[i];
+        }
+        return new int[0];
+    }
+
+    void dfs(boolean[] visited, int x, int fa) {
+        visited[x] = true;
+        for (int i = 0; i < to.get(x).size(); i++) {
+            if(to.get(x).get(i) == fa) continue;
+            if(!visited[to.get(x).get(i)]) {
+                dfs(visited, to.get(x).get(i), x);
+            } else {
+                hasCycle = true;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         FiveSolution fiveSolution = new FiveSolution();
