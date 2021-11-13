@@ -306,10 +306,57 @@ public class FiveSolution {
         }
     }
 
+    //https://leetcode-cn.com/problems/n-queens/
+    public List<List<String>> solveNQueens(int n) {
+        boolean[] used = new boolean[n];
+        Arrays.fill(used, false);
+        HashMap<Integer, Boolean> usedPlus = new HashMap<>();
+        HashMap<Integer, Boolean> usedMinus = new HashMap<>();
+        dfs(n, 0, used, usedPlus, usedMinus);
+
+        List<List<String>> ans = new ArrayList<>();
+        for (List<Integer> p: result) {
+            List<String> temp = new ArrayList<>();
+            for (int row = 0; row < n; row++) {
+                char[] chs = new char[n];
+                Arrays.fill(chs, '.');
+                chs[p.get(row)] = 'Q';
+                temp.add(new String(chs));
+            }
+            ans.add(temp);
+        }
+        return ans;
+    }
+    private List<Integer> p = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>();
+    void dfs(int n, int row, boolean[] used
+            , HashMap<Integer, Boolean> usedPlus, HashMap<Integer, Boolean> usedMinus) {
+        if(row == n) {
+            result.add(new ArrayList<>(p));
+            return;
+        }
+        for (int col = 0; col < n ; col++) {
+            if(!used[col] && !usedPlus.getOrDefault(row+col, false)
+            && !usedMinus.getOrDefault(row - col, false)) {
+                p.add(col);
+                used[col] = true;
+                usedPlus.put(row + col, true);
+                usedMinus.put(row - col, true);
+                dfs(n, row + 1,used, usedPlus, usedMinus);
+                used[col] = false;
+                usedPlus.put(row + col, false);
+                usedMinus.put(row - col, false);
+                final int temp = col;
+                p.removeIf(item -> item==temp);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         FiveSolution fiveSolution = new FiveSolution();
         System.out.println(fiveSolution.myPow(2,10));
         System.out.println(-(1l<<31));
         System.out.println(fiveSolution.generateParenthesis(1));
+        System.out.println(fiveSolution.solveNQueens(4));
     }
 }
