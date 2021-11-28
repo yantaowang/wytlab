@@ -10,6 +10,7 @@
         <module>wytlab-spring-boot</module>
         <module>wytlab-erwan</module>
         <module>wytlab-doc</module>
+        <module>wytlab-hbase</module>
     </modules>
 
     <parent>
