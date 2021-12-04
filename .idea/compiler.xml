@@ -12,12 +12,14 @@
         <module name="wytlab-spring-boot" />
         <module name="wytlab-erwan" />
         <module name="wytlab-parent" />
+        <module name="wytlab-hbase" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="wytlab" target="1.8" />
       <module name="wytlab-doc" target="1.8" />
       <module name="wytlab-erwan" target="1.8" />
+      <module name="wytlab-hbase" target="1.8" />
       <module name="wytlab-mq-starter" target="8" />
       <module name="wytlab-parent" target="1.8" />
       <module name="wytlab-spring-boot" target="1.8" />
@@ -28,6 +30,7 @@
       <module name="wytlab" options="" />
       <module name="wytlab-doc" options="-parameters" />
       <module name="wytlab-erwan" options="-parameters" />
+      <module name="wytlab-hbase" options="-parameters" />
       <module name="wytlab-mq-starter" options="-parameters" />
       <module name="wytlab-parent" options="-parameters" />
       <module name="wytlab-spring-boot" options="-parameters" />
