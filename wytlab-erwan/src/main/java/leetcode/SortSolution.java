@@ -1,6 +1,6 @@
 package leetcode;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * 排序
@@ -32,5 +32,23 @@ public class SortSolution {
             }
         }
         return r;
+    }
+
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr2.length; i++) {
+            map.put(arr2[i], i);
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr1.length;i++){
+            list.add(arr1[i]);
+        }
+        Collections.sort(list, (x, y) -> {
+            if(map.containsKey(x) || map.containsKey(y))
+                return map.getOrDefault(x, 1001) - map.getOrDefault(y, 1001);
+            return x - y;
+        });
+        for(int i = 0; i < arr1.length; i++) arr1[i] = list.get(i);
+        return arr1;
     }
 }
