@@ -1,0 +1,4 @@
+1、一次解码器：ByteToMessageDecoder
+2、二次解码器：ProtobufDecoder
+3、内存池PooledDirectByteBuf 
+4、堆外内存DirectByteBuffer

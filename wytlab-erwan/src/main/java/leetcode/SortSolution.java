@@ -51,4 +51,52 @@ public class SortSolution {
         for(int i = 0; i < arr1.length; i++) arr1[i] = list.get(i);
         return arr1;
     }
+
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) {
+            return new int[0][2];
+        }
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[0] != o2[0]) {
+                    return o1[0] - o2[0];
+                } else {
+                    return o1[1] - o2[1];
+                }
+            }
+        });
+
+        List<int[]> merged = new ArrayList<int[]>();
+        int farthest = -1;
+        int start = -1;
+        for (int[] arr : intervals) {
+            int left = arr[0];
+            int right = arr[1];
+            if (left <= farthest) {
+                farthest = Math.max(right, farthest);
+            } else {
+                if (farthest != -1) {
+                    merged.add(new int[]{start, farthest});
+                }
+                start = left;
+                farthest = right;
+            }
+        }
+        merged.add(new int[]{start, farthest});
+        return merged.toArray(new int[merged.size()][]);
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+       Arrays.sort(nums);
+       return nums[nums.length - k];
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(2,3,1,2,4);
+        Collections.sort(list, (x, y) -> {
+            return y-x;
+        });
+        System.out.println(list);
+    }
 }
