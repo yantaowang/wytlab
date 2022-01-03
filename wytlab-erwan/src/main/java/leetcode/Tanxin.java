@@ -6,6 +6,26 @@ import java.util.Map;
 
 public class Tanxin {
 
+    public int jump(int[] nums) {
+        int now = 0;
+        int ans = 0;
+        while (now < nums.length - 1) {
+            int right = now + nums[now];
+            if(right >= nums.length - 1) return ans+1;
+            int nextRight = right;
+            int next = now;
+            for (int i = now+1; i <= right ; i++) {
+                if(i + nums[i] > nextRight) {
+                    nextRight = i + nums[i];
+                    next = i;
+                }
+            }
+            now = next;
+            ans++;
+        }
+        return ans;
+    }
+
     public int maxProfit(int[] prices) {
         int ans = 0;
         for (int i = 0; i < prices.length; i++) {
