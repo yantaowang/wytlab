@@ -22,7 +22,7 @@ import java.util.Map;
  * @date 2021-01-28 15:53:24
  */
 @RestController
-@RequestMapping(value = "/user")
+//@RequestMapping(value = "/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -57,10 +57,10 @@ public class UserController {
     @SentinelResource(value = "userlist",
             blockHandlerClass = CommonBlockHandler.class,
             blockHandler = "handleException",fallback = "fallback")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) throws InterruptedException {
         PageUtils page = userService.queryPage(params);
        // int i=1/0;
-
+        Thread.sleep(200);
         return R.ok().put("page", page);
     }
 
@@ -80,7 +80,8 @@ public class UserController {
             fallback = "fallback"
     )
     public R info(@PathVariable("id") Integer id){
-		UserEntity user = userService.getById(id);
+		UserEntity user = new UserEntity();
+		user.setId(1);
 
 		if(id==4){
 		    throw new IllegalArgumentException("异常参数");
@@ -101,7 +102,7 @@ public class UserController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody UserEntity user){
-		userService.save(user);
+//		userService.save(user);
         return R.ok();
     }
 
@@ -110,7 +111,7 @@ public class UserController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody UserEntity user){
-		userService.updateById(user);
+//		userService.updateById(user);
 
         return R.ok();
     }
@@ -120,7 +121,7 @@ public class UserController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Integer[] ids){
-		userService.removeByIds(Arrays.asList(ids));
+//		userService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

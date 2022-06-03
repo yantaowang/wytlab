@@ -4,6 +4,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-doc/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-erwan/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-mq-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-spring-boot/pom.xml" />
+        <option value="$PROJECT_DIR$/wytlab-hbase/pom.xml" />
       </list>
     </option>
   </component>
