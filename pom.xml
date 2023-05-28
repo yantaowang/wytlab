@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>wytlab-mq-starter</module>
         <module>wytlab-parent</module>
         <module>wytlab-spring-boot</module>
         <module>wytlab-erwan</module>

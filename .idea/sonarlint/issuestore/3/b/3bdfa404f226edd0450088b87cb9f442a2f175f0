@@ -1,0 +1,49 @@
+
+S
+java:S1117"8Rename "ans" which hides the field declared at line 272.(íÍÃ©şÿÿÿÿ
+S
+java:S1117#"8Rename "ans" which hides the field declared at line 272.(…„¥Éûÿÿÿÿ
+7
+java:S1659B"!Declare "ans" on a separate line.(ŸÑÛó
+5
+java:S1659C"Declare "y" on a separate line.(äÛÁ”
+N
+java:S1117B"8Rename "ans" which hides the field declared at line 272.(ŸÑÛó
+H
+java:S1135J"2Complete the task associated to this TODO comment.(ş‰å²
+H
+java:S1135M"2Complete the task associated to this TODO comment.(ş‰å²
+S
+java:S1117t"8Rename "ans" which hides the field declared at line 272.(ì¥£Şùÿÿÿÿ
+T
+java:S1117¼"8Rename "ans" which hides the field declared at line 272.(…„¥Éûÿÿÿÿ
+N
+java:S1117Õ"8Rename "ans" which hides the field declared at line 272.(››}
+=
+java:S1168å"&Return an empty array instead of null.(¥¹ï
+T
+java:S1117ë"8Rename "ans" which hides the field declared at line 272.(ó¤Óûÿÿÿÿ
+;
+java:S1659ö"Declare "j" on a separate line.(·Œí–üÿÿÿÿ
+T
+java:S1117÷"8Rename "ans" which hides the field declared at line 272.(…„¥Éûÿÿÿÿ
+T
+java:S1117„"8Rename "ans" which hides the field declared at line 272.(ó¤Óûÿÿÿÿ
+@
+java:S5413Î")Verify that "remove()" is used correctly.(¡èæË
+o
+java:S2293e"YReplace the type specification in this constructor call with the diamond operator ("<>").(˜Š”²
+t
+java:S2293j"YReplace the type specification in this constructor call with the diamond operator ("<>").(ˆ±¦¤şÿÿÿÿ
+t
+java:S2293n"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ò—˜ùÿÿÿÿ
+u
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùåàÇûÿÿÿÿ
+p
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ûí‚
+o
+java:S2293™"YReplace the type specification in this constructor call with the diamond operator ("<>").(ºÖ±c
+U
+java:S1155É">Use isEmpty() to check whether the collection is empty or not.(µ¬È
+A
+java:S5411É"*Use the primitive boolean expression here.(µ¬È

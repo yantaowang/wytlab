@@ -1,0 +1,10 @@
+
+4
+java:S2119"Save and re-use this "Random".(Ÿˆìü
+i
+java:S1602a"SRemove useless curly braces around statement and then remove useless return keyword(Ç—ËÛ
+S	java:S106d"9Replace this use of System.out or System.err by a logger.(ã¿¢Ôùÿÿÿÿ
+o
+java:S2293F"YReplace the type specification in this constructor call with the diamond operator ("<>").(—¨ø
+=
+java:S1604;"(Make this anonymous inner class a lambda(Õá¾?
