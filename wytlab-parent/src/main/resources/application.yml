@@ -1,0 +1,16 @@
+server:
+  port: 8001
+
+spring:
+  redis:
+    database: 1
+    host: bj-crs-7aqvgafd.sql.tencentcdb.com
+    port: 20236
+    password: ks4HfhkV
+    timeout: 1000
+    lettuce:
+      pool:
+        max-active: 16
+        max-idle: 16
+        max-wait: 300
+        min-idle: 0

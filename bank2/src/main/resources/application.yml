@@ -1,0 +1,64 @@
+server:
+  port: 56085
+  servlet:
+    context-path: /bank2
+  application:
+    name: bank2-service
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3358/bank2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ams2020
+    type: com.zaxxer.hikari.HikariDataSource
+    ## 最小空闲连接数量
+    hikari.minimum-idle: 30
+    ## 空闲连接存活最大时间，默认600000（10分钟）
+    hikari.idle-timeout: 180000
+    ## 连接池最大连接数，默认是10
+    hikari.maximum-pool-size: 80
+    ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+    hikari.auto-commit: true
+    hikari.pool-name: MysqlBaseHikariCP
+    ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+    hikari.max-lifetime: 1800000
+    ## 数据库连接超时时间,默认30秒，即30000
+    hikari.connection-timeout: 30000
+  application:
+    name: bank2-service
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis:
+  type-aliases-package: com.wyt
+  config-location: classpath:mybatis/mybatis-config.xml
+
+#Ribbon的负载均衡策略
+ribbon:
+  NFLoadBalancerRuleClassName:  com.netflix.loadbalancer.RandomRule
+  MaxAutoRetriesNextServer : 0
+  MaxAutoRetries: 0
+  ReadTimeout: 3000
+feign:
+  hystrix:
+    enabled : false
+    # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
+
+logging:
+  level:
+    root: error
+    org.springframework.web: info
+    org.apache.ibatis: debug
+    org.dromara.hmily.demo.bonuspoint: debug
+    org.dromara.hmily.demo.lottery: debug
+    org.dromara.hmily.demo: debug
+    io.netty: info
+  path: "./logs"
+
