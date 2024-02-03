@@ -10,6 +10,7 @@
         <module name="wytlab-doc" />
         <module name="wytlab-erwan" />
         <module name="bank2" />
+        <module name="prom" />
         <module name="bank1" />
         <module name="wytlab-spring-boot" />
         <module name="wytlab-parent" />
@@ -30,6 +31,7 @@
       <module name="bank1" options="-parameters" />
       <module name="bank2" options="-parameters" />
       <module name="euraker-server" options="-parameters" />
+      <module name="prom" options="-parameters" />
       <module name="webflux-wyt" options="-parameters" />
       <module name="wytlab" options="-parameters" />
       <module name="wytlab-doc" options="-parameters" />

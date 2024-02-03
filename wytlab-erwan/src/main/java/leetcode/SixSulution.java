@@ -77,10 +77,6 @@ public class SixSulution {
         return r;
     }
 
-    public int findNumberOfLIS(int[] nums) {
-
-    }
-    
     public static void main(String[] args) {
         longestCommonSubsequence("fsfs","dd");
     }

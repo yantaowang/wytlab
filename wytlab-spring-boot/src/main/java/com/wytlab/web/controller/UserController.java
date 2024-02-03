@@ -8,7 +8,18 @@ import com.wytlab.web.sentinel.CommonFallback;
 import com.wytlab.web.service.UserService;
 import com.wytlab.web.utils.PageUtils;
 import com.wytlab.web.utils.R;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.PropertyValues;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -23,7 +34,12 @@ import java.util.Map;
  */
 @RestController
 //@RequestMapping(value = "/user")
-public class UserController {
+public class UserController implements ApplicationContextInitializer,
+        BeanFactoryPostProcessor, InstantiationAwareBeanPostProcessor,
+        SmartInitializingSingleton,
+        BeanFactoryAware, BeanNameAware, InitializingBean, FactoryBean,
+        DisposableBean,
+        ApplicationListener {
     @Autowired
     private UserService userService;
 
@@ -126,4 +142,68 @@ public class UserController {
         return R.ok();
     }
 
+    @Override
+    public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+
+    }
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
+
+    }
+
+    @Override
+    public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+        return InstantiationAwareBeanPostProcessor.super.postProcessAfterInstantiation(bean, beanName);
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return InstantiationAwareBeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
+    }
+
+    @Override
+    public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
+        return InstantiationAwareBeanPostProcessor.super.postProcessProperties(pvs, bean, beanName);
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+
+    }
+
+    @Override
+    public void setBeanName(String s) {
+
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
+    }
+
+    @Override
+    public Object getObject() throws Exception {
+        return null;
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return null;
+    }
+
+    @Override
+    public void afterSingletonsInstantiated() {
+
+    }
+
+    @Override
+    public void destroy() throws Exception {
+
+    }
+
+    @Override
+    public void onApplicationEvent(ApplicationEvent applicationEvent) {
+
+    }
 }
